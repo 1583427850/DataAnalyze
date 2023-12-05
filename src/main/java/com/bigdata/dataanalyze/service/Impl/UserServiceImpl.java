@@ -2,8 +2,8 @@ package com.bigdata.dataanalyze.service.Impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bigdata.dataanalyze.entity.User;
+import com.bigdata.dataanalyze.mapper.UserMapper;
 import com.bigdata.dataanalyze.service.UserService;
-import generator.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 
 /**
