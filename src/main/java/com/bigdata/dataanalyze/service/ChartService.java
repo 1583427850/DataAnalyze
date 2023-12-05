@@ -1,7 +1,10 @@
 package com.bigdata.dataanalyze.service;
 
+import com.bigdata.dataanalyze.common.dto.AnalyzeDto;
 import com.bigdata.dataanalyze.entity.Chart;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.bigdata.dataanalyze.entity.User;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
 * @author lin
@@ -10,4 +13,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface ChartService extends IService<Chart> {
 
+    /**
+     * 生成对应表格信息
+     * @param dto
+     * @param user
+     */
+    boolean genChart(String goal,String chartName, User user, MultipartFile file);
 }

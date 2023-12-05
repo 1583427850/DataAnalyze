@@ -2,6 +2,7 @@ package com.bigdata.dataanalyze.mapper;
 
 import com.bigdata.dataanalyze.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
 * @author lin
@@ -9,6 +10,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @createDate 2023-12-05 15:42:23
 * @Entity com.bigdata.dataanalyze.entity.User
 */
+@Mapper
 public interface UserMapper extends BaseMapper<User> {
 
 }
