@@ -19,4 +19,6 @@ public interface ChartService extends IService<Chart> {
      * @param user
      */
     boolean genChart(String goal,String chartName, User user, MultipartFile file);
+
+    boolean updateChart(Long chartId,String genChart,String getResult );
 }

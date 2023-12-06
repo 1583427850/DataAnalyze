@@ -1,9 +1,12 @@
 package com.bigdata.dataanalyze.controller;
 
+import cn.hutool.json.JSONUtil;
 import com.bigdata.dataanalyze.common.BaseResponse;
 import com.bigdata.dataanalyze.common.ErrorCode;
 import com.bigdata.dataanalyze.common.ResultUtils;
 import com.bigdata.dataanalyze.common.dto.AnalyzeDto;
+import com.bigdata.dataanalyze.entity.Chart;
+import com.bigdata.dataanalyze.entity.ExcelEntity;
 import com.bigdata.dataanalyze.entity.User;
 import com.bigdata.dataanalyze.service.ChartService;
 import com.bigdata.dataanalyze.service.UserService;
@@ -41,7 +44,9 @@ public class ChartsController {
             return ResultUtils.error(ErrorCode.SYSTEM_ERROR,"生成图表失败");
         }
         return ResultUtils.success("成功");
+
     }
+
 
     /**
      * 获取某一个用户的所有图表
@@ -52,23 +57,15 @@ public class ChartsController {
     @GetMapping("/data")
     public BaseResponse getCharts(Integer size, Integer page, HttpServletRequest request){
         User user = userService.getLoginUser(request);
-        if(user==null){
-            return ResultUtils.error(ErrorCode.NO_AUTH_ERROR,"请先登录");
-        }
-        return null;
+//        if(user==null){
+//            return ResultUtils.error(ErrorCode.NO_AUTH_ERROR,"请先登录");
+//        }
+        Chart byId = chartService.getById(33);
+        System.out.println(byId.getGenchart());
+        return ResultUtils.success(byId.getGenchart());
     }
 
-//    @PostMapping("/test")
-//    public BaseResponse analyze(@RequestPart("file")MultipartFile file,
-//                                HttpServletRequest request){
-//
-//        if( file==null){
-//            return ResultUtils.error(ErrorCode.PARAMS_ERROR,"参数错误");
-//        }
-//        String result = ExcelUtils.excelToCsv(file);
-//        System.out.println(result);
-//        return null;
-//    }
+
 
 
 

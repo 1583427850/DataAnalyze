@@ -1,14 +1,20 @@
 package com.bigdata.dataanalyze.service.Impl;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONArray;
+import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bigdata.dataanalyze.common.constant.MqConstant;
 import com.bigdata.dataanalyze.common.dto.AnalyzeDto;
 import com.bigdata.dataanalyze.entity.Chart;
 import com.bigdata.dataanalyze.entity.GptMessage;
+import com.bigdata.dataanalyze.entity.MqMessageEntity;
 import com.bigdata.dataanalyze.entity.User;
 import com.bigdata.dataanalyze.mapper.ChartMapper;
 import com.bigdata.dataanalyze.service.ChartService;
@@ -54,11 +60,18 @@ public class ChartServiceImpl extends ServiceImpl<ChartMapper, Chart>
         boolean save = this.save(chart);
 
 //        将生成消息的信息发送到rocketmq中
-        List<GptMessage> messages = GenMessageUtils.genMessage(chart, file);
-        log.info("问题为:{}",JSON.toJSON(messages));
-        rocketMQTemplate.syncSend(MqConstant.chartTopic, JSON.toJSON(messages));
+        Collection<String> chartHeader = ExcelUtils.getChartHeader(file);
+        String str = String.join(" ", chartHeader);
+        MqMessageEntity mqMessageEntity = GenMessageUtils.genMessage(chart, file,str);
+        log.info("问题为:{}",JSON.toJSON(mqMessageEntity));
+        rocketMQTemplate.syncSend(MqConstant.chartTopic, JSON.toJSON(mqMessageEntity));
         log.info("发送消息成功");
         return true;
+    }
+
+    @Override
+    public boolean updateChart(Long chartId, String genChart, String getResult) {
+        return this.update(Wrappers.<Chart>lambdaUpdate().eq(Chart::getId, chartId).set(Chart::getGetresult, getResult).set(Chart::getGenchart, genChart));
     }
 
 

@@ -1,0 +1,26 @@
+{
+  "mappings": {
+    "properties": {
+      "header": {
+        "type": "text",
+        "analyzer": "ik_smart"
+      },
+      "userId": {
+        "type": "keyword",
+        "index": false
+      },
+      "chartName": {
+        "type": "keyword",
+        "index": false
+      },
+      "chartId": {
+        "type": "keyword",
+        "index": false
+      },
+      "chartContent": {
+        "type": "text",
+        "analyzer": "ik_smart"
+      }
+    }
+  }
+}

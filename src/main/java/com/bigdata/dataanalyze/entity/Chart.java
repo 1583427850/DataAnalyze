@@ -28,6 +28,11 @@ public class Chart implements Serializable {
     private String goal;
 
     /**
+     * 表格名字
+     */
+    private String chartName;
+
+    /**
      * 图表信息
      */
     private String chartdata;

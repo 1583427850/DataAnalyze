@@ -2,6 +2,7 @@ package com.bigdata.dataanalyze.utils;
 
 import com.bigdata.dataanalyze.entity.Chart;
 import com.bigdata.dataanalyze.entity.GptMessage;
+import com.bigdata.dataanalyze.entity.MqMessageEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
@@ -24,12 +25,12 @@ public class GenMessageUtils {
 
                     """;
 
-    public static List<GptMessage> genMessage(Chart chart, MultipartFile file) {
+    public static MqMessageEntity genMessage(Chart chart, MultipartFile file,String chartHeader) {
         ArrayList<GptMessage> messages = new ArrayList<>();
         GptMessage system = new GptMessage("system", prompt);
         messages.add(system);
         String answer = "分析需求:".concat("\n").concat(chart.getGoal()).concat("\n").concat("原始数据：").concat("\n").concat(chart.getChartdata());
         messages.add(new GptMessage("user", answer));
-        return messages;
+        return new MqMessageEntity(messages, chart.getId(), 0,chart.getChartName(),chartHeader);
     }
 }
