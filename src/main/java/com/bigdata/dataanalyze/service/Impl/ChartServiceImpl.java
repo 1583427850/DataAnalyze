@@ -49,6 +49,8 @@ public class ChartServiceImpl extends ServiceImpl<ChartMapper, Chart>
 
 //        根据file的excel文件，将里面的所有数据提取出来
         String fileMessage = ExcelUtils.excelToCsv(file);
+        Collection<String> chartHeader = ExcelUtils.getChartHeader(file);
+        String str = String.join(" ", chartHeader);
         log.info("文件内容为：{}",fileMessage);
         Chart chart = new Chart();
         chart.setGoal(goal);
@@ -56,12 +58,11 @@ public class ChartServiceImpl extends ServiceImpl<ChartMapper, Chart>
         chart.setUserid(user.getId());
         chart.setCreatetime(new Date());
         chart.setUpdatetime(new Date());
+        chart.setChartHeader(str);
 //       先保存到数据库
         boolean save = this.save(chart);
 
 //        将生成消息的信息发送到rocketmq中
-        Collection<String> chartHeader = ExcelUtils.getChartHeader(file);
-        String str = String.join(" ", chartHeader);
         MqMessageEntity mqMessageEntity = GenMessageUtils.genMessage(chart, file,str);
         log.info("问题为:{}",JSON.toJSON(mqMessageEntity));
         rocketMQTemplate.syncSend(MqConstant.chartTopic, JSON.toJSON(mqMessageEntity));

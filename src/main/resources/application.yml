@@ -25,4 +25,8 @@ rocketmq:
       send-message-timeout: 3000 # 消息发送超时时长，默认3s
       retry-times-when-send-failed: 3 # 同步发送消息失败重试次数，默认2
       retry-times-when-send-async-failed: 3 # 异步发送消息失败重试次数，默认2
+zhiji:
+  apiKey: 3ae622ed2c8edafb59318893d454adaf.N0Z0Id6Qxd52ePyc
+
+
 

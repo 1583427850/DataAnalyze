@@ -33,6 +33,11 @@ public class Chart implements Serializable {
     private String chartName;
 
     /**
+     * 表头信息 用空格分开
+     */
+    private String chartHeader;
+
+    /**
      * 图表信息
      */
     private String chartdata;

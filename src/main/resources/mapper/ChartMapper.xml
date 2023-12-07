@@ -12,6 +12,7 @@
             <result property="genchart" column="genChart" jdbcType="VARCHAR"/>
             <result property="chartName" column="chartName" jdbcType="VARCHAR"/>
             <result property="getresult" column="getResult" jdbcType="VARCHAR"/>
+            <result property="chartHeader" column="chartHeader" jdbcType="VARCHAR"/>
             <result property="userid" column="userId" jdbcType="BIGINT"/>
             <result property="createtime" column="createTime" jdbcType="TIMESTAMP"/>
             <result property="updatetime" column="updateTime" jdbcType="TIMESTAMP"/>
