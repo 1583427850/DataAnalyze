@@ -31,6 +31,6 @@ public class GenMessageUtils {
         messages.add(system);
         String answer = "分析需求:".concat("\n").concat(chart.getGoal()).concat("\n").concat("原始数据：").concat("\n").concat(chart.getChartdata());
         messages.add(new GptMessage("user", answer));
-        return new MqMessageEntity(messages, chart.getId(), 0,chart.getChartName(),chartHeader);
+        return new MqMessageEntity(messages, chart.getId(), 0,chart.getChartname(),chartHeader);
     }
 }

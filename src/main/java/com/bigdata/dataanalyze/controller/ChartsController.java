@@ -45,9 +45,9 @@ public class ChartsController {
             return ResultUtils.error(ErrorCode.PARAMS_ERROR,"参数错误");
         }
 
-        User user = new User();
-        user.setId(1L);
-//        User user = userService.getLoginUser(request);
+//        User user = new User();
+//        user.setId(1L);
+        User user = userService.getLoginUser(request);
         if(user==null){
             return ResultUtils.error(ErrorCode.NO_AUTH_ERROR,"请先登录");
         }
@@ -67,10 +67,11 @@ public class ChartsController {
      */
     @GetMapping("/data")
     public BaseResponse getCharts(Integer size, Integer page, HttpServletRequest request){
-        User user = userService.getLoginUser(request);
-//        if(user==null){
-//            return ResultUtils.error(ErrorCode.NO_AUTH_ERROR,"请先登录");
-//        }
+//        User user = userService.getLoginUser(request);
+        User user = new User();
+        if(user==null){
+            return ResultUtils.error(ErrorCode.NO_AUTH_ERROR,"请先登录");
+        }
         user.setId(1L);
         List<Chart> charts = chartService.list(Wrappers.<Chart>lambdaQuery().eq(Chart::getUserid, user.getId()));
         return ResultUtils.success(charts);
@@ -82,18 +83,21 @@ public class ChartsController {
      * @param chartId
      * @return
      */
+    @GetMapping("/chartAndSimilarity")
     public BaseResponse getChartAndSimilarity(HttpServletRequest request,Long chartId){
         User user = userService.getLoginUser(request);
+//        User user = new User();
         if(user==null){
             return ResultUtils.error(ErrorCode.NO_AUTH_ERROR,"请先登录");
         }
+        user.setId(1L);
 
         Chart chart = chartService.getById(chartId);
         if(chart==null){
             return ResultUtils.error(ErrorCode.NO_AUTH_ERROR,"图表不存在");
         }
 
-        String chartHeader = chart.getChartHeader();
+        String chartHeader = chart.getChartheader();
         try {
 
             SearchResponse<EsChart> similarity = esChartService.getSimilarity(chartHeader, user.getId());

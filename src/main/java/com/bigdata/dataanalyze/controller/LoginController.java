@@ -35,7 +35,7 @@ public class LoginController {
         }
         HttpSession session = request.getSession();
         session.setAttribute(UserConstant.USER_SESSION_KEY,one);
-        return ResultUtils.success("成功");
+        return ResultUtils.success(one);
     }
 
 }

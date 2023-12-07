@@ -58,7 +58,7 @@ public class ChartServiceImpl extends ServiceImpl<ChartMapper, Chart>
         chart.setUserid(user.getId());
         chart.setCreatetime(new Date());
         chart.setUpdatetime(new Date());
-        chart.setChartHeader(str);
+        chart.setChartheader(str);
 //       先保存到数据库
         boolean save = this.save(chart);
 

@@ -27,6 +27,8 @@ rocketmq:
       retry-times-when-send-async-failed: 3 # 异步发送消息失败重试次数，默认2
 zhiji:
   apiKey: 3ae622ed2c8edafb59318893d454adaf.N0Z0Id6Qxd52ePyc
-
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: false
 
 

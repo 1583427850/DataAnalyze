@@ -30,12 +30,12 @@ public class Chart implements Serializable {
     /**
      * 表格名字
      */
-    private String chartName;
+    private String chartname;
 
     /**
      * 表头信息 用空格分开
      */
-    private String chartHeader;
+    private String chartheader;
 
     /**
      * 图表信息
