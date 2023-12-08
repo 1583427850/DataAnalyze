@@ -41,7 +41,7 @@ public class EsChartServiceImpl implements EsChartService {
      * @return
      */
     @Override
-    public SearchResponse<EsChart> getSimilarity(String chartHeader, Long userId) throws IOException {
+    public SearchResponse<EsChart> getSimilarity(String chartHeader, Long chartId) throws IOException {
         SearchResponse<EsChart> response = client.search(s -> s
                         .index("chart")
                         .query(q -> q
@@ -54,8 +54,8 @@ public class EsChartServiceImpl implements EsChartService {
                                         )
                                         .mustNot(m -> m
                                                 .term(t -> t
-                                                        .field("userId")
-                                                        .value(userId)
+                                                        .field("chartId")
+                                                        .value(chartId)
                                                 )
                                         )
                                 )

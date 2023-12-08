@@ -100,7 +100,7 @@ public class ChartsController {
         String chartHeader = chart.getChartheader();
         try {
 
-            SearchResponse<EsChart> similarity = esChartService.getSimilarity(chartHeader, user.getId());
+            SearchResponse<EsChart> similarity = esChartService.getSimilarity(chartHeader, chartId);
             HashMap<String, Object> returnMap = new HashMap<>();
             returnMap.put("chart",chart);
             if(similarity.hits().hits().size()==0) {
