@@ -18,10 +18,15 @@ import java.util.List;
 
 public class Test1 {
 
+    public void test0(){
+        
+    }
+
 
 
 
     public void test1() {
+
 
         String prompt = """
                 你是一个数据分析师和前端开发专家，接下来我会按照以下固定格式给你提供内容：

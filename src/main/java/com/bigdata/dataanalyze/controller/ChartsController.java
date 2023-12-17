@@ -56,7 +56,6 @@ public class ChartsController {
             return ResultUtils.error(ErrorCode.SYSTEM_ERROR,"生成图表失败");
         }
         return ResultUtils.success("成功");
-
     }
 
     /**
@@ -120,6 +119,9 @@ public class ChartsController {
 
 
 
+    @PostMapping("/chartAndSimilarity")
+    public void test3(){
 
+    }
 
 }
